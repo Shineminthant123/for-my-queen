@@ -15,51 +15,51 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 450px; width: 90%; z-index: 10;
         }
         #counter { font-size: 2.5rem; font-weight: bold; color: #ff4d6d; margin: 15px 0; }
-        
+
         /* Profile Image */
-        .profile-img { 
-            width: 120px; height: 120px; border-radius: 50%; object-fit: cover; 
+        .profile-img {
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
             border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             margin-bottom: 15px;
         }
-        
+
         /* Music Player */
-        .music-player { margin: 20px 0; background: #fff0f3; padding: 10px; border-radius: 15px; }
-        audio { width: 100%; height: 35px; }
+        .music-player { margin: 20px 0; background: #fff0f3; padding: 15px; border-radius: 15px; }
+        audio { width: 100%; height: 40px; }
 
         .quiz-sec { margin-top: 20px; border-top: 2px dashed #ffb3c1; padding-top: 20px; min-height: 250px; }
         .btn {
             background: #ff4d6d; color: white; border: none; padding: 12px;
-            border-radius: 25px; cursor: pointer; margin: 8px; transition: 0.3s; width: 90%; font-size: 1rem;
+            border-radius: 25px; cursor: pointer; margin: 8px; transition: 0.3s; width: 95%; font-size: 1rem;
         }
         .btn:hover { background: #ff758f; transform: scale(1.03); }
         #result { margin-top: 15px; font-weight: bold; font-size: 1.1rem; min-height: 50px; }
-        
+
         .heart { position: fixed; top: -10%; font-size: 20px; animation: fall linear infinite; z-index: 1; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        
+
         .lyrics { font-style: italic; color: #777; font-size: 0.9rem; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="https://i.ibb.co/q6gL2pM/q6gL2pM.jpg" alt="My Queen" class="profile-img">
+    <img src="https://i.ibb.co/vVzGr6Gb/photo-2026-02-00-37-04.jpg" alt="My Queen" class="profile-img">
 
     <div class="music-player">
         <audio id="myAudio" controls loop>
             <source src="https://github.com/Shineminthant123/for-my-queen/raw/main/Tiktok_1775405450861.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <p style="font-size: 0.8rem; color: #ff4d6d; font-weight: bold; margin-top: 5px;">Listen to our song 🎶</p>
+        <p style="font-size: 0.9rem; color: #ff4d6d; font-weight: bold; margin-top: 8px;">ခလေးလေး သီချင်းလေး ဖွင့်လိုက်နော် 🎶</p>
     </div>
 
     <div style="font-size: 30px;">💖</div>
     <h2>Together Since 8.3.2026</h2>
     <div id="counter">0 Days</div>
-    
+
     <div class="quiz-sec" id="quiz-container">
-        <h3 id="quiz-title">Quick Quiz for You! ✨</h3>
+        <h3 id="quiz-title">ခလေးလေး အတွက် မေးခွန်းလေးတွေ ✨</h3>
         <p id="question"></p>
         <div id="options"></div>
         <div id="result"></div>
@@ -72,18 +72,18 @@
 
 <script>
     // ရက်ပေါင်းတွက်ချက်ခြင်း
-    const startDate = new Date(2026, 2, 8); 
+    const startDate = new Date(2026, 2, 8); // 8 March 2026
     function updateCounter() {
         const diff = new Date() - startDate;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById('counter').innerText = (days >= 0 ? days : 0) + " ရက်";
+        document.getElementById('counter').innerText = (days >= 0 ? days : 0) + " ရက်မြောက်နေ့";
     }
 
     // Quiz Data
     const quizData = [
         { q: "ကိုယ်တို့ နှစ်ယောက် အမှတ်တရ စဆုံခဲ့တဲ့ နေရာက?", options: ["ကျောင်းရှေ့", "Bus ကားပေါ်", "ဘုရားပေါ်"], correct: 2 },
         { q: "ကိုယ်တို့ရဲ့ First Date နေ့လေးက?", options: ["မတ်လ ၂၇ ရက်", "မတ်လ ၂၀ ရက်", "ဧပြီလ ၁ ရက်"], correct: 0 },
-        { q: "ကိုယ် မင်းကို ပေးခဲ့တဲ့ ပထမဆုံး လက်ဆောင်က?", options: ["ပန်းစည်း", "နှုတ်ခမ်းနီ", "Key Chain"], correct: 1 }
+        { q: "ကိုယ် ခလေးလေးကို ပေးခဲ့တဲ့ ပထမဆုံး လက်ဆောင်က?", options: ["ပန်းစည်း", "နှုတ်ခမ်းနီ", "Key Chain"], correct: 1 }
     ];
 
     let currentQuestion = 0;
@@ -92,10 +92,10 @@
         const qElement = document.getElementById('question');
         const optElement = document.getElementById('options');
         const resElement = document.getElementById('result');
-        
-        resElement.innerText = ""; 
+
+        resElement.innerText = "";
         optElement.innerHTML = "";
-        
+
         if (currentQuestion < quizData.length) {
             const current = quizData[currentQuestion];
             qElement.innerText = current.q;
@@ -107,16 +107,16 @@
                 optElement.appendChild(button);
             });
         } else {
-            document.getElementById('quiz-container').innerHTML = "<h3>အကုန်မှန်တယ်! တော်လိုက်တာ ❤️</h3><p style='color:#ff4d6d; font-size:1.2rem;'>မင်းကို အရမ်းချစ်တယ်နော် My Queen!</p>";
+            document.getElementById('quiz-container').innerHTML = "<h3>အကုန်မှန်တယ်! တော်လိုက်တာ ခလေးလေး ❤️</h3><p style='color:#ff4d6d; font-size:1.2rem;'>မင်းကို အရမ်းချစ်တယ်နော် My Queen!</p>";
         }
     }
 
     function checkAns(idx) {
         const res = document.getElementById('result');
         const audio = document.getElementById('myAudio');
-        
-        // ပထမဆုံးအဖြေနှိပ်တာနဲ့ သီချင်းစဖွင့်ပေးခြင်း
-        audio.play().catch(e => console.log("Autoplay blocked, user interaction required."));
+
+        // အဖြေနှိပ်တာနဲ့ သီချင်းစဖွင့်ပေးခြင်း
+        audio.play().catch(e => console.log("Interaction required."));
 
         if(idx === quizData[currentQuestion].correct) {
             res.innerHTML = "မှန်သွားပြီ! ❤️";
