@@ -7,7 +7,6 @@
     <style>
         :root {
             --primary: #ff4d6d;
-            --secondary: #ff758f;
             --soft-pink: #fff0f3;
         }
 
@@ -15,17 +14,18 @@
             margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;
             background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
             font-family: 'Segoe UI', 'Pyidaungsu', Arial, sans-serif; text-align: center; color: #444; overflow-x: hidden;
+            cursor: pointer; /* နှိပ်လို့ရမှန်းသိအောင် */
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95); padding: 40px 25px; border-radius: 30px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.1); max-width: 400px; width: 85%; z-index: 10;
-            position: relative; border: 2px solid #fff;
+            border: 2px solid #fff;
         }
 
         .profile-img {
             width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 5px solid #fff; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+            border: 6px solid #fff; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
             margin-bottom: 20px; animation: float 3s ease-in-out infinite;
         }
 
@@ -34,45 +34,51 @@
             50% { transform: translateY(-10px); }
         }
 
-        h2 { color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; }
-
         #counter-box {
             background: var(--soft-pink); padding: 15px; border-radius: 20px; margin: 20px 0;
             border: 1px solid #ffb3c1;
         }
 
         #days { font-size: 2.8rem; font-weight: bold; color: var(--primary); display: block; }
-        .label { font-size: 1rem; color: #888; letter-spacing: 1px; }
+        .label { font-size: 0.9rem; color: #888; letter-spacing: 1px; font-weight: bold; }
 
         .message-box {
             margin-top: 25px; line-height: 1.8; color: #555; font-size: 1.05rem;
-            min-height: 100px; padding: 0 10px;
+            min-height: 120px; padding: 0 10px; font-family: 'Pyidaungsu', sans-serif;
         }
 
-        .music-player { margin: 20px 0; }
-        audio { width: 100%; height: 40px; border-radius: 20px; }
+        .music-player { margin: 20px 0; padding: 10px; background: #fff0f3; border-radius: 15px; }
+        audio { width: 100%; height: 40px; }
 
         .heart { position: fixed; top: -10%; font-size: 20px; animation: fall linear infinite; z-index: 1; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* Floating Animation for Anniversary */
-        .anni-text {
-            color: #d35400; font-weight: bold; font-size: 1.2rem;
+        .anni-tag {
+            color: #d35400; font-weight: bold; font-size: 1.1rem;
             background: #fff3e0; padding: 8px 20px; border-radius: 50px;
             display: inline-block; margin-bottom: 15px; animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
+
+        /* Click to Play Hint */
+        #play-hint {
+            position: fixed; bottom: 20px; width: 100%; color: white;
+            font-size: 0.8rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: fadeOut 5s forwards;
+        }
+        @keyframes fadeOut { 0% {opacity: 1;} 80% {opacity: 1;} 100% {opacity: 0;} }
     </style>
 </head>
 <body>
 
+<div id="play-hint">စခရင်ကို တစ်ချက်နှိပ်ပြီး သီချင်းဖွင့်ပါ 🎶</div>
+
 <div class="container">
-    <div id="tag-container"></div>
+    <div class="anni-tag">✨ Happy 1 Month Anniversary ✨</div>
 
     <img src="queen.jpg" alt="My Queen" class="profile-img">
 
@@ -81,44 +87,38 @@
         <span class="label">DAYS OF LOVE ❤️</span>
     </div>
 
-    <div class="music-player">
-        <audio id="myAudio" controls loop>
-            <source src="https://github.com/Shineminthant123/for-my-queen/raw/main/Tiktok_1775405450861.mp3" type="audio/mpeg">
-        </audio>
-        <p style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-top: 10px;">Music On လေးနဲ့ ဖတ်ပေးနော် 🎶</p>
-    </div>
-
     <div class="message-box" id="typing-text"></div>
+
+    <div class="music-player">
+        <audio id="myAudio" loop>
+            <source src="https://github.com/Shineminthant123/for-my-queen/raw/main/Tiktok_1775405450861.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p style="font-size: 0.75rem; color: var(--primary); font-weight: bold; margin-top: 5px;">Music is Playing... 🎶</p>
+    </div>
     
-    <div style="font-size: 2rem; margin-top: 20px;">🌹</div>
+    <div style="font-size: 1.5rem;">🌹</div>
 </div>
 
 <script>
-    const startDate = new Date(2026, 2, 8); // March 8, 2026
+    // စတင်တွဲသည့်ရက်စွဲ (March 8, 2026)
+    const startDate = new Date(2026, 2, 8); 
 
-    function updatePage() {
+    function updateCounter() {
         const today = new Date();
         const diff = today - startDate;
         const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
         document.getElementById('days').innerText = totalDays >= 0 ? totalDays : 0;
-
-        // တစ်လပြည့်နေ့ (၈ ရက်နေ့) ဖြစ်ခဲ့လျှင်
-        if (today.getDate() === 8 && totalDays > 0) {
-            const months = (today.getFullYear() - startDate.getFullYear()) * 12 + (today.getMonth() - startDate.getMonth());
-            if (months > 0) {
-                document.getElementById('tag-container').innerHTML = `<div class="anni-text">✨ Happy ${months} Month Anniversary! ✨</div>`;
-                startSpecialEffect();
-            }
-        }
     }
 
-    const loveLetter = "ခလေးလေး... ကိုယ်တို့နှစ်ယောက် စတွဲခဲ့တာ ဒီနေ့ဆိုရင် ၁ လပြည့်သွားပြီနော်။ ဒီတစ်လအတွင်းမှာ ကိုယ့်ကို ပျော်ရွှင်အောင် ထားပေးလို့ ကျေးဇူးအများကြီးတင်ပါတယ်။ ရှေ့ဆက်မယ့် လပေါင်းများစွာ၊ နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ တစ်ယောက်လက်ကိုတစ်ယောက် မြဲမြဲတွဲပြီး ရှေ့ဆက်သွားကြမယ်နော်။ မင်းကို အရမ်းချစ်တယ် My Queen! ❤️";
+    // မင်းပြောစေချင်တဲ့ စာသားလေး
+    const loveLetter = "ကိုကို တို့နှစ်ယောက် စတွဲခဲ့တာ ဒီနေ့ဆိုရင် ၁ လပြည့်သွားပြီနော်။ ဒီတစ်လအတွင်းမှာ ကိုယ့်ကို ပျော်ရွှင်အောင် ထားပေးလို့ ကျေးဇူးအများကြီးတင်ပါတယ်။ ရှေ့ဆက်မယ့် လပေါင်းများစွာ၊ နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ တစ်ယောက်လက်ကိုတစ်ယောက် မြဲမြဲတွဲပြီး ရှေ့ဆက်သွားကြမယ်နော်။ ခလေးလေးကို ကိုကို အရမ်းချစ်တယ်! ❤️";
 
-    let i = 0;
+    let charIndex = 0;
     function typeMessage() {
-        if (i < loveLetter.length) {
-            document.getElementById('typing-text').innerHTML += loveLetter.charAt(i);
-            i++;
+        if (charIndex < loveLetter.length) {
+            document.getElementById('typing-text').innerHTML += loveLetter.charAt(charIndex);
+            charIndex++;
             setTimeout(typeMessage, 100);
         }
     }
@@ -129,32 +129,28 @@
         heart.innerHTML = ['❤️','💖','🌸','🌹','✨'][Math.floor(Math.random()*5)];
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 5000);
     }
 
-    function startSpecialEffect() {
-        setInterval(() => {
-            const sparkles = document.createElement('div');
-            sparkles.className = 'heart';
-            sparkles.innerHTML = '🎉';
-            sparkles.style.left = Math.random() * 100 + 'vw';
-            sparkles.style.animationDuration = '2s';
-            document.body.appendChild(sparkles);
-            setTimeout(() => sparkles.remove(), 2000);
-        }, 300);
+    // သီချင်းဖွင့်ခြင်းဆိုင်ရာ Error ပြင်ဆင်ချက်
+    function handleMusic() {
+        const audio = document.getElementById('myAudio');
+        audio.play().then(() => {
+            console.log("Music started!");
+        }).catch(error => {
+            console.log("Waiting for user interaction...");
+        });
     }
 
     window.onload = () => {
-        updatePage();
+        updateCounter();
         setInterval(createHeart, 400);
-        setTimeout(typeMessage, 1000);
-        
-        // Music Autoplay attempt (needs user click anywhere)
-        document.body.addEventListener('click', () => {
-            document.getElementById('myAudio').play();
-        }, { once: true });
+        setTimeout(typeMessage, 1500);
+
+        // Screen တစ်ခုလုံးကို ဘယ်နေရာနှိပ်နှိပ် သီချင်းပွင့်စေရန်
+        document.body.addEventListener('click', handleMusic, { once: true });
+        document.body.addEventListener('touchstart', handleMusic, { once: true });
     };
 </script>
 
