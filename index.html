@@ -3,205 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Queen - 1 Month Anniversary</title>
+    <title>Happy 1 Month Anniversary</title>
     <style>
         :root {
-            --primary-color: #ff4d6d;
-            --secondary-color: #ff758f;
-            --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fbc2eb 100%);
-            --container-bg: rgba(255, 255, 255, 0.98);
+            --primary: #ff4d6d;
+            --secondary: #ff758f;
+            --soft-pink: #fff0f3;
         }
 
         body {
             margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            background: var(--bg-gradient);
-            font-family: 'Segoe UI', Arial, sans-serif; text-align: center; color: #444; overflow-x: hidden;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            font-family: 'Segoe UI', 'Pyidaungsu', Arial, sans-serif; text-align: center; color: #444; overflow-x: hidden;
         }
 
         .container {
-            background: var(--container-bg); padding: 35px 25px; border-radius: 30px;
-            box-shadow: 0 15px 40px rgba(255, 77, 109, 0.2); max-width: 420px; width: 90%; z-index: 10;
-            position: relative; border: 3px solid #fff; transition: 0.5s;
+            background: rgba(255, 255, 255, 0.95); padding: 40px 25px; border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1); max-width: 400px; width: 85%; z-index: 10;
+            position: relative; border: 2px solid #fff;
         }
-
-        /* Anniversary Glow Effect */
-        .anni-active {
-            border: 3px solid #ff4d6d !important;
-            animation: glow 2s infinite alternate;
-        }
-        @keyframes glow { 
-            from { box-shadow: 0 0 10px #ff4d6d; } 
-            to { box-shadow: 0 0 30px #ff758f, 0 0 40px #ffb3c1; } 
-        }
-
-        #anni-banner {
-            background: linear-gradient(45deg, #ff4d6d, #ff758f);
-            color: white; padding: 12px; border-radius: 15px;
-            font-weight: bold; margin-bottom: 15px; display: none; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            animation: popIn 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.49);
-        }
-        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
 
         .profile-img {
-            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-            border: 6px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px;
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+            border: 5px solid #fff; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+            margin-bottom: 20px; animation: float 3s ease-in-out infinite;
         }
 
-        #counter { font-size: 2.2rem; font-weight: bold; color: var(--primary-color); margin: 10px 0; }
-        .days-label { font-size: 1rem; color: #888; margin-bottom: 20px; }
-
-        .music-player { margin: 20px 0; background: #fff0f3; padding: 15px; border-radius: 20px; border: 1px solid #ffb3c1; }
-        audio { width: 100%; height: 40px; }
-
-        .quiz-sec { border-top: 2px dashed #ffb3c1; padding-top: 20px; margin-top: 20px; min-height: 280px; }
-        .btn {
-            background: var(--primary-color); color: white; border: none; padding: 12px;
-            border-radius: 25px; cursor: pointer; margin: 8px 0; width: 100%; font-size: 1rem;
-            transition: 0.3s; box-shadow: 0 4px 8px rgba(255, 77, 109, 0.2);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .btn:hover { background: var(--secondary-color); transform: translateY(-2px); }
+
+        h2 { color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; }
+
+        #counter-box {
+            background: var(--soft-pink); padding: 15px; border-radius: 20px; margin: 20px 0;
+            border: 1px solid #ffb3c1;
+        }
+
+        #days { font-size: 2.8rem; font-weight: bold; color: var(--primary); display: block; }
+        .label { font-size: 1rem; color: #888; letter-spacing: 1px; }
+
+        .message-box {
+            margin-top: 25px; line-height: 1.8; color: #555; font-size: 1.05rem;
+            min-height: 100px; padding: 0 10px;
+        }
+
+        .music-player { margin: 20px 0; }
+        audio { width: 100%; height: 40px; border-radius: 20px; }
 
         .heart { position: fixed; top: -10%; font-size: 20px; animation: fall linear infinite; z-index: 1; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        .lyrics-box { font-style: italic; color: #777; font-size: 0.9rem; margin-top: 15px; min-height: 40px; line-height: 1.4; }
+        /* Floating Animation for Anniversary */
+        .anni-text {
+            color: #d35400; font-weight: bold; font-size: 1.2rem;
+            background: #fff3e0; padding: 8px 20px; border-radius: 50px;
+            display: inline-block; margin-bottom: 15px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container" id="main-card">
-    <div id="anni-banner">🎉 Happy 1 Month Anniversary! 🎉</div>
+<div class="container">
+    <div id="tag-container"></div>
+
     <img src="queen.jpg" alt="My Queen" class="profile-img">
-    
+
+    <div id="counter-box">
+        <span id="days">0</span>
+        <span class="label">DAYS OF LOVE ❤️</span>
+    </div>
+
     <div class="music-player">
         <audio id="myAudio" controls loop>
             <source src="https://github.com/Shineminthant123/for-my-queen/raw/main/Tiktok_1775405450861.mp3" type="audio/mpeg">
         </audio>
-        <p style="font-size: 0.85rem; color: #ff4d6d; font-weight: bold; margin-top: 5px;">သီချင်းလေး ဖွင့်ပေးပါဦး ခလေးလေး 🎵</p>
+        <p style="font-size: 0.8rem; color: var(--primary); font-weight: bold; margin-top: 10px;">Music On လေးနဲ့ ဖတ်ပေးနော် 🎶</p>
     </div>
 
-    <div id="counter">0 Days</div>
-    <div class="days-label">Since 8 March 2026 ❤️</div>
-
-    <div class="quiz-sec" id="quiz-container">
-        <h3 style="font-size: 1.1rem;">တို့နှစ်ယောက်အကြောင်း ဘယ်လောက်သိလဲ? ✨</h3>
-        <p id="question" style="font-weight: 500;"></p>
-        <div id="options"></div>
-        <div id="result" style="margin-top: 10px; font-weight: bold; min-height: 30px;"></div>
-    </div>
-
-    <div class="lyrics-box" id="typing-lyrics"></div>
+    <div class="message-box" id="typing-text"></div>
+    
+    <div style="font-size: 2rem; margin-top: 20px;">🌹</div>
 </div>
 
 <script>
-    // စတင်တွဲခဲ့တဲ့ရက် (March 8, 2026)
-    const startDate = new Date(2026, 2, 8); 
+    const startDate = new Date(2026, 2, 8); // March 8, 2026
 
-    function updateLogic() {
+    function updatePage() {
         const today = new Date();
-        
-        // --- TEST MODE (အစမ်းကြည့်ရန်) ---
-        // ဒီနေ့ကို April 8 လို့ ယာယီသတ်မှတ်ပြီး စမ်းသပ်တာပါ
-        const testDate = new Date(2026, 3, 8); 
-        const checkDate = testDate; // အစစ်အတိုင်းကြည့်ချင်ရင် testDate နေရာမှာ today ပြောင်းပါ
-        // ------------------------------
-
-        const diff = checkDate - startDate;
+        const diff = today - startDate;
         const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-        
-        document.getElementById('counter').innerText = (totalDays >= 0 ? totalDays : 0) + " ရက်မြောက်နေ့";
+        document.getElementById('days').innerText = totalDays >= 0 ? totalDays : 0;
 
-        // တစ်လပြည့်နေ့ စစ်ဆေးခြင်း
-        if (checkDate.getDate() === 8 && totalDays > 0) {
-            const months = (checkDate.getFullYear() - startDate.getFullYear()) * 12 + (checkDate.getMonth() - startDate.getMonth());
+        // တစ်လပြည့်နေ့ (၈ ရက်နေ့) ဖြစ်ခဲ့လျှင်
+        if (today.getDate() === 8 && totalDays > 0) {
+            const months = (today.getFullYear() - startDate.getFullYear()) * 12 + (today.getMonth() - startDate.getMonth());
             if (months > 0) {
-                const banner = document.getElementById('anni-banner');
-                banner.innerText = `🎉 Happy ${months} Month Anniversary! 🎉`;
-                banner.style.display = 'block';
-                document.getElementById('main-card').classList.add('anni-active');
-                startConfetti();
+                document.getElementById('tag-container').innerHTML = `<div class="anni-text">✨ Happy ${months} Month Anniversary! ✨</div>`;
+                startSpecialEffect();
             }
         }
     }
 
-    const quizData = [
-        { q: "ကိုယ်တို့ စတွဲခဲ့တဲ့ နေ့လေးက?", options: ["မတ်လ ၇ ရက်", "မတ်လ ၈ ရက်", "မတ်လ ၉ ရက်"], correct: 1 },
-        { q: "ကိုယ် ခလေးကို အမြဲတမ်း ခေါ်တဲ့ နာမည်က?", options: ["ဝက်ကလေး", "ခလေးလေး", "အသည်းလေး"], correct: 1 },
-        { q: "ဒီနေ့က ကိုယ်တို့အတွက် ဘာနေ့လေးလဲ?", options: ["Anniversary", "ရိုးရိုးနေ့", "Birthday"], correct: 0 }
-    ];
+    const loveLetter = "ခလေးလေး... ကိုယ်တို့နှစ်ယောက် စတွဲခဲ့တာ ဒီနေ့ဆိုရင် ၁ လပြည့်သွားပြီနော်။ ဒီတစ်လအတွင်းမှာ ကိုယ့်ကို ပျော်ရွှင်အောင် ထားပေးလို့ ကျေးဇူးအများကြီးတင်ပါတယ်။ ရှေ့ဆက်မယ့် လပေါင်းများစွာ၊ နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ တစ်ယောက်လက်ကိုတစ်ယောက် မြဲမြဲတွဲပြီး ရှေ့ဆက်သွားကြမယ်နော်။ မင်းကို အရမ်းချစ်တယ် My Queen! ❤️";
 
-    let currentQ = 0;
-    function loadQuiz() {
-        const qEl = document.getElementById('question');
-        const optEl = document.getElementById('options');
-        const resEl = document.getElementById('result');
-
-        if (currentQ < quizData.length) {
-            qEl.innerText = quizData[currentQ].q;
-            optEl.innerHTML = "";
-            quizData[currentQ].options.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.innerText = opt; btn.className = 'btn';
-                btn.onclick = () => {
-                    if(i === quizData[currentQ].correct) {
-                        resEl.innerText = "မှန်တယ် ချစ်လေး! ❤️";
-                        resEl.style.color = "#2a9d8f";
-                        currentQ++;
-                        setTimeout(loadQuiz, 1000);
-                        document.getElementById('myAudio').play().catch(() => {});
-                    } else {
-                        resEl.innerText = "မှားသွားပြီ... ပြန်စဉ်းစားကြည့်! 😜";
-                        resEl.style.color = "#e76f51";
-                    }
-                };
-                optEl.appendChild(btn);
-            });
-        } else {
-            document.getElementById('quiz-container').innerHTML = "<h3>အကုန်မှန်တယ်! အရမ်းချစ်တယ်နော် ❤️</h3><p style='color:#ff4d6d; font-weight:bold;'>မင်းဟာ ကိုယ့်ရဲ့ ကမ္ဘာငယ်လေးပါ My Queen!</p>";
-            startConfetti();
+    let i = 0;
+    function typeMessage() {
+        if (i < loveLetter.length) {
+            document.getElementById('typing-text').innerHTML += loveLetter.charAt(i);
+            i++;
+            setTimeout(typeMessage, 100);
         }
     }
 
     function createHeart() {
         const heart = document.createElement('div');
         heart.className = 'heart';
-        heart.innerHTML = ['❤️','💖','🌸','🌹'][Math.floor(Math.random()*4)];
+        heart.innerHTML = ['❤️','💖','🌸','🌹','✨'][Math.floor(Math.random()*5)];
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 5000);
     }
 
-    function startConfetti() {
-        for(let i=0; i<50; i++) {
-            setTimeout(() => {
-                const c = document.createElement('div');
-                c.className = 'heart';
-                c.innerHTML = ['✨','🎉','🌸'][Math.floor(Math.random()*3)];
-                c.style.left = Math.random() * 100 + 'vw';
-                c.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                document.body.appendChild(c);
-                setTimeout(() => c.remove(), 2000);
-            }, i * 100);
-        }
+    function startSpecialEffect() {
+        setInterval(() => {
+            const sparkles = document.createElement('div');
+            sparkles.className = 'heart';
+            sparkles.innerHTML = '🎉';
+            sparkles.style.left = Math.random() * 100 + 'vw';
+            sparkles.style.animationDuration = '2s';
+            document.body.appendChild(sparkles);
+            setTimeout(() => sparkles.remove(), 2000);
+        }, 300);
     }
 
-    const lyrics = "You are the best thing that ever happened to me... \nHappy Anniversary, my love!";
-    let lIdx = 0;
-    function typeLyrics() {
-        const lyricsEl = document.getElementById('typing-lyrics');
-        if(lIdx < lyrics.length) {
-            lyricsEl.innerHTML += lyrics.charAt(lIdx) === '\n' ? '<br>' : lyrics.charAt(lIdx);
-            lIdx++;
-            setTimeout(typeLyrics, 70);
-        }
-    }
-
-    setInterval(createHeart, 600);
-    updateLogic();
-    loadQuiz();
-    setTimeout(typeLyrics, 1500);
+    window.onload = () => {
+        updatePage();
+        setInterval(createHeart, 400);
+        setTimeout(typeMessage, 1000);
+        
+        // Music Autoplay attempt (needs user click anywhere)
+        document.body.addEventListener('click', () => {
+            document.getElementById('myAudio').play();
+        }, { once: true });
+    };
 </script>
+
 </body>
 </html>
