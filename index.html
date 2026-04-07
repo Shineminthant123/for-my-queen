@@ -3,313 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Queen - Happy Anniversary</title>
+    <title>For My Queen - 1 Month Anniversary</title>
     <style>
         :root {
             --primary-color: #ff4d6d;
             --secondary-color: #ff758f;
-            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            --container-bg: rgba(255, 255, 255, 0.95);
-            --text-color: #444;
-            --anni-gold: #fdf2e9; /* Anniversary Special BG */
+            --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fbc2eb 100%);
+            --container-bg: rgba(255, 255, 255, 0.98);
         }
 
         body {
             margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;
             background: var(--bg-gradient);
-            font-family: 'Segoe UI', 'Pyidaungsu', Arial, sans-serif; text-align: center; color: var(--text-color); overflow-x: hidden;
-            transition: background 1s ease;
+            font-family: 'Segoe UI', Arial, sans-serif; text-align: center; color: #444; overflow-x: hidden;
         }
 
         .container {
-            background: var(--container-bg); padding: 40px 30px; border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); max-width: 450px; width: 90%; z-index: 10;
-            position: relative; transition: all 0.5s ease; border: 2px solid transparent;
+            background: var(--container-bg); padding: 35px 25px; border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(255, 77, 109, 0.2); max-width: 420px; width: 90%; z-index: 10;
+            position: relative; border: 3px solid #fff; transition: 0.5s;
         }
 
-        /* Anniversary Special Style */
-        .container.anniversary-mode {
-            background: var(--anni-gold);
-            border-color: #f39c12;
-            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.3);
+        /* Anniversary Glow Effect */
+        .anni-active {
+            border: 3px solid #ff4d6d !important;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow { 
+            from { box-shadow: 0 0 10px #ff4d6d; } 
+            to { box-shadow: 0 0 30px #ff758f, 0 0 40px #ffb3c1; } 
         }
 
-        #anni-message {
-            display: none; color: #d35400; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px;
-            animation: heartBeat 1.5s infinite;
+        #anni-banner {
+            background: linear-gradient(45deg, #ff4d6d, #ff758f);
+            color: white; padding: 12px; border-radius: 15px;
+            font-weight: bold; margin-bottom: 15px; display: none; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: popIn 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.49);
         }
-
-        #counter { font-size: 2.8rem; font-weight: bold; color: var(--primary-color); margin: 10px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
 
         .profile-img {
-            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 8px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            margin-bottom: 20px; transition: transform 0.3s ease;
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            border: 6px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px;
         }
-        .profile-img:hover { transform: scale(1.05) rotate(3deg); }
 
-        .music-player { margin: 25px 0; background: #fff0f3; padding: 18px; border-radius: 20px; border: 1px solid #ffb3c1; }
-        audio { width: 100%; height: 45px; outline: none; }
-        audio::-webkit-media-controls-panel { background-color: #fff0f3; }
+        #counter { font-size: 2.2rem; font-weight: bold; color: var(--primary-color); margin: 10px 0; }
+        .days-label { font-size: 1rem; color: #888; margin-bottom: 20px; }
 
-        .quiz-sec { margin-top: 25px; border-top: 2px dashed #ffb3c1; padding-top: 25px; min-height: 300px; transition: opacity 0.5s; }
+        .music-player { margin: 20px 0; background: #fff0f3; padding: 15px; border-radius: 20px; border: 1px solid #ffb3c1; }
+        audio { width: 100%; height: 40px; }
+
+        .quiz-sec { border-top: 2px dashed #ffb3c1; padding-top: 20px; margin-top: 20px; min-height: 280px; }
         .btn {
-            background: var(--primary-color); color: white; border: none; padding: 14px;
-            border-radius: 30px; cursor: pointer; margin: 10px 0; transition: all 0.3s ease; width: 100%; font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3); font-family: 'Pyidaungsu', sans-serif;
+            background: var(--primary-color); color: white; border: none; padding: 12px;
+            border-radius: 25px; cursor: pointer; margin: 8px 0; width: 100%; font-size: 1rem;
+            transition: 0.3s; box-shadow: 0 4px 8px rgba(255, 77, 109, 0.2);
         }
-        .btn:hover { background: var(--secondary-color); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(255, 77, 109, 0.4); }
-        .btn:active { transform: translateY(-1px); }
+        .btn:hover { background: var(--secondary-color); transform: translateY(-2px); }
 
-        #result { margin-top: 20px; font-weight: bold; font-size: 1.2rem; min-height: 60px; transition: color 0.3s; }
-
-        /* Hearts & Confetti */
-        .heart, .confetti { position: fixed; top: -10%; font-size: 20px; animation: fall linear infinite; z-index: 1; pointer-events: none; }
+        .heart { position: fixed; top: -10%; font-size: 20px; animation: fall linear infinite; z-index: 1; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* Special Anniversary Floating Message */
-        #floating-memories {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; display: none;
-        }
-        .floating-word {
-            position: absolute; color: var(--primary-color); font-weight: bold;
-            opacity: 0; animation: floatUp 4s ease-in infinite; font-size: 1.1rem;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100%) scale(0.8); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
-        }
-
-        /* Typing Effect for Lyrics */
-        .lyrics-container { font-style: italic; color: #777; font-size: 0.95rem; margin-top: 20px; min-height: 20px; }
-        #typing-text::after { content: '|'; animation: blink 0.7s infinite; }
-
-        @keyframes blink { 50% { opacity: 0; } }
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.1); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.1); }
-            70% { transform: scale(1); }
-        }
-
-        /* မြန်မာစာ Font အဆင်ပြေအောင် */
-        @font-face {
-            font-family: 'Pyidaungsu';
-            src: url('https://cdn.jsdelivr.net/gh/googlefonts/pyidaungsu@master/fonts/ttf/Pyidaungsu-Regular.ttf') format('truetype');
-        }
+        .lyrics-box { font-style: italic; color: #777; font-size: 0.9rem; margin-top: 15px; min-height: 40px; line-height: 1.4; }
     </style>
 </head>
 <body>
 
-<div class="container" id="main-container">
-    <div id="anni-message">🎉 Happy Anniversary, My Queen! 🎉</div>
+<div class="container" id="main-card">
+    <div id="anni-banner">🎉 Happy 1 Month Anniversary! 🎉</div>
     <img src="queen.jpg" alt="My Queen" class="profile-img">
     
     <div class="music-player">
         <audio id="myAudio" controls loop>
             <source src="https://github.com/Shineminthant123/for-my-queen/raw/main/Tiktok_1775405450861.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
         </audio>
-        <p style="font-size: 0.95rem; color: #ff4d6d; font-weight: bold; margin-top: 10px; font-family: 'Pyidaungsu', sans-serif;">ခလေးလေး သီချင်းလေး ဖွင့်လိုက်နော် 🎶</p>
+        <p style="font-size: 0.85rem; color: #ff4d6d; font-weight: bold; margin-top: 5px;">သီချင်းလေး ဖွင့်ပေးပါဦး ခလေးလေး 🎵</p>
     </div>
 
-    <div style="font-size: 35px; animation: heartBeat 2s infinite;">💖</div>
-    <h2 style="font-family: 'Pyidaungsu', sans-serif; margin-bottom: 5px;">Together Since 8.3.2026</h2>
-    <div id="counter">0 ရက်</div>
+    <div id="counter">0 Days</div>
+    <div class="days-label">Since 8 March 2026 ❤️</div>
 
     <div class="quiz-sec" id="quiz-container">
-        <h3 id="quiz-title" style="font-family: 'Pyidaungsu', sans-serif;">ခလေးလေး အတွက် မေးခွန်းလေးတွေ ✨</h3>
-        <p id="question" style="font-size: 1.1rem; min-height: 1.2em;"></p>
+        <h3 style="font-size: 1.1rem;">တို့နှစ်ယောက်အကြောင်း ဘယ်လောက်သိလဲ? ✨</h3>
+        <p id="question" style="font-weight: 500;"></p>
         <div id="options"></div>
-        <div id="result"></div>
+        <div id="result" style="margin-top: 10px; font-weight: bold; min-height: 30px;"></div>
     </div>
 
-    <div id="floating-memories"></div>
-
-    <div class="lyrics-container">
-        "<span id="typing-text"></span>"
-    </div>
+    <div class="lyrics-box" id="typing-lyrics"></div>
 </div>
 
 <script>
-    // --- ချိန်ညှိချက်များ (Configuration) ---
-    const anniversaryDate = { month: 2, day: 8 }; // March 8 (JS Months: 0-11)
-    const typingSpeed = 100; // စာရိုက်တဲ့အမြန်နှုန်း (ms)
-    const wordsToFloat = ["အရမ်းချစ်တယ်", "အမြဲတူတူ", "ခလေးလေး", "My Queen", "Forever", "Sweetheart", "Memory", "၈ မတ်လ"];
+    // စတင်တွဲခဲ့တဲ့ရက် (March 8, 2026)
+    const startDate = new Date(2026, 2, 8); 
 
-    // ရက်ပေါင်းတွက်ချက်ခြင်း
-    const startDate = new Date(2025, 2, 8); // 8 March 2026
+    function updateLogic() {
+        const today = new Date();
+        
+        // --- TEST MODE (အစမ်းကြည့်ရန်) ---
+        // ဒီနေ့ကို April 8 လို့ ယာယီသတ်မှတ်ပြီး စမ်းသပ်တာပါ
+        const testDate = new Date(2026, 3, 8); 
+        const checkDate = testDate; // အစစ်အတိုင်းကြည့်ချင်ရင် testDate နေရာမှာ today ပြောင်းပါ
+        // ------------------------------
 
-    function updateCounter() {
-        const now = new Date();
-        const diff = now - startDate;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const finalDays = days >= 0 ? days : 0;
+        const diff = checkDate - startDate;
+        const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
         
-        document.getElementById('counter').innerText = finalDays + " ရက်မြောက်နေ့";
-        
-        // Anniversary နေ့ ဟုတ်မဟုတ် စစ်ဆေးခြင်း
-        if (now.getMonth() === anniversaryDate.month && now.getDate() === anniversaryDate.day) {
-            activateAnniversaryMode();
+        document.getElementById('counter').innerText = (totalDays >= 0 ? totalDays : 0) + " ရက်မြောက်နေ့";
+
+        // တစ်လပြည့်နေ့ စစ်ဆေးခြင်း
+        if (checkDate.getDate() === 8 && totalDays > 0) {
+            const months = (checkDate.getFullYear() - startDate.getFullYear()) * 12 + (checkDate.getMonth() - startDate.getMonth());
+            if (months > 0) {
+                const banner = document.getElementById('anni-banner');
+                banner.innerText = `🎉 Happy ${months} Month Anniversary! 🎉`;
+                banner.style.display = 'block';
+                document.getElementById('main-card').classList.add('anni-active');
+                startConfetti();
+            }
         }
     }
 
-    // Anniversary Mode ကို အသက်သွင်းခြင်း
-    function activateAnniversaryMode() {
-        const container = document.getElementById('main-container');
-        const anniMsg = document.getElementById('anni-message');
-        
-        if (!container.classList.contains('anniversary-mode')) {
-            container.classList.add('anniversary-mode');
-            anniMsg.style.display = 'block';
-            startConfetti(); // ပန်းပွင့်လေးတွေ ကြွေကျစေခြင်း
-        }
-    }
-
-    // Quiz Data
     const quizData = [
-        { q: "ကိုယ်တို့ နှစ်ယောက် အမှတ်တရ စဆုံခဲ့တဲ့ နေရာက?", options: ["ကျောင်းရှေ့", "Bus ကားပေါ်", "ဘုရားပေါ်"], correct: 2 },
-        { q: "ကိုယ်တို့ရဲ့ First Date နေ့လေးက?", options: ["မတ်လ ၂၇ ရက်", "မတ်လ ၂၀ ရက်", "ဧပြီလ ၁ ရက်"], correct: 0 },
-        { q: "ကိုယ် ခလေးလေးကို ပေးခဲ့တဲ့ ပထမဆုံး လက်ဆောင်က?", options: ["ပန်းစည်း", "နှုတ်ခမ်းနီ", "Key Chain"], correct: 1 }
+        { q: "ကိုယ်တို့ စတွဲခဲ့တဲ့ နေ့လေးက?", options: ["မတ်လ ၇ ရက်", "မတ်လ ၈ ရက်", "မတ်လ ၉ ရက်"], correct: 1 },
+        { q: "ကိုယ် ခလေးကို အမြဲတမ်း ခေါ်တဲ့ နာမည်က?", options: ["ဝက်ကလေး", "ခလေးလေး", "အသည်းလေး"], correct: 1 },
+        { q: "ဒီနေ့က ကိုယ်တို့အတွက် ဘာနေ့လေးလဲ?", options: ["Anniversary", "ရိုးရိုးနေ့", "Birthday"], correct: 0 }
     ];
 
-    let currentQuestion = 0;
-
+    let currentQ = 0;
     function loadQuiz() {
-        const qElement = document.getElementById('question');
-        const optElement = document.getElementById('options');
-        const resElement = document.getElementById('result');
+        const qEl = document.getElementById('question');
+        const optEl = document.getElementById('options');
+        const resEl = document.getElementById('result');
 
-        resElement.innerText = "";
-        optElement.innerHTML = "";
-
-        if (currentQuestion < quizData.length) {
-            const current = quizData[currentQuestion];
-            qElement.innerText = current.q;
-            current.options.forEach((opt, index) => {
-                const button = document.createElement('button');
-                button.innerText = opt;
-                button.className = 'btn';
-                button.onclick = () => checkAns(index);
-                optElement.appendChild(button);
+        if (currentQ < quizData.length) {
+            qEl.innerText = quizData[currentQ].q;
+            optEl.innerHTML = "";
+            quizData[currentQ].options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.innerText = opt; btn.className = 'btn';
+                btn.onclick = () => {
+                    if(i === quizData[currentQ].correct) {
+                        resEl.innerText = "မှန်တယ် ချစ်လေး! ❤️";
+                        resEl.style.color = "#2a9d8f";
+                        currentQ++;
+                        setTimeout(loadQuiz, 1000);
+                        document.getElementById('myAudio').play().catch(() => {});
+                    } else {
+                        resEl.innerText = "မှားသွားပြီ... ပြန်စဉ်းစားကြည့်! 😜";
+                        resEl.style.color = "#e76f51";
+                    }
+                };
+                optEl.appendChild(btn);
             });
         } else {
-            // Quiz တွေ အကုန်ဖြေပြီးချိန်
-            document.getElementById('quiz-container').innerHTML = "<h3>အကုန်မှန်တယ်! တော်လိုက်တာ ခလေးလေး ❤️</h3><p style='color:#ff4d6d; font-size:1.3rem; font-weight:bold;'>မင်းကို အရမ်းချစ်တယ်နော် My Queen!</p>";
-            startFloatingMemories();
-            startConfetti(); // ဖြေပြီးရင်လည်း Confetti ချပေးမယ်
+            document.getElementById('quiz-container').innerHTML = "<h3>အကုန်မှန်တယ်! အရမ်းချစ်တယ်နော် ❤️</h3><p style='color:#ff4d6d; font-weight:bold;'>မင်းဟာ ကိုယ့်ရဲ့ ကမ္ဘာငယ်လေးပါ My Queen!</p>";
+            startConfetti();
         }
     }
 
-    function checkAns(idx) {
-        const res = document.getElementById('result');
-        const audio = document.getElementById('myAudio');
-
-        // အဖြေနှိပ်တာနဲ့ သီချင်းစဖွင့်ပေးခြင်း (User Interaction)
-        audio.play().catch(e => console.log("Audio play blocked until interaction."));
-
-        if(idx === quizData[currentQuestion].correct) {
-            res.innerHTML = "မှန်သွားပြီ! ❤️";
-            res.style.color = "#2a9d8f";
-            currentQuestion++;
-            setTimeout(loadQuiz, 1000);
-        } else {
-            res.innerText = "မှားသွားပြီ... ပြန်စဉ်းစားကြည့်ဦး 😜";
-            res.style.color = "#e76f51";
-            // တုန်ခါသွားတဲ့ effect နည်းနည်းထည့်မယ်
-            res.animate([{transform: 'translateX(-5px)'}, {transform: 'translateX(5px)'}], {duration: 100, iterations: 3});
-        }
-    }
-
-    // --- Animations ---
-
-    // နှလုံးသား Animation (ပုံမှန်)
     function createHeart() {
         const heart = document.createElement('div');
         heart.className = 'heart';
-        heart.innerHTML = '❤️';
+        heart.innerHTML = ['❤️','💖','🌸','🌹'][Math.floor(Math.random()*4)];
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        heart.style.opacity = Math.random() * 0.5 + 0.5;
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 5000);
     }
 
-    // Confetti Animation (Special)
-    let confettiInterval;
     function startConfetti() {
-        if (confettiInterval) return; // မရှိသေးရင်ပဲ စမယ်
-        const colors = ['#ff4d6d', '#ff758f', '#ffd700', '#2a9d8f', '#fff'];
-        
-        confettiInterval = setInterval(() => {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.innerHTML = '🎉'; // သို့မဟုတ် '🌸'
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
-            confetti.style.fontSize = Math.random() * 10 + 15 + 'px';
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 3000);
-        }, 150);
-        
-        // 10 စက္ကန့်ကြာရင် Confetti ကို ရပ်မယ်
-        setTimeout(() => {
-            clearInterval(confettiInterval);
-            confettiInterval = null;
-        }, 10000);
-    }
-
-    // Floating Words Memory
-    function startFloatingMemories() {
-        const container = document.getElementById('floating-memories');
-        container.style.display = 'block';
-        
-        wordsToFloat.forEach((word, index) => {
+        for(let i=0; i<50; i++) {
             setTimeout(() => {
-                const el = document.createElement('div');
-                el.className = 'floating-word';
-                el.innerText = word;
-                el.style.left = Math.random() * 70 + 15 + '%'; // Container ထဲမှာပဲ ရှိနေအောင်
-                el.style.animationDelay = `${Math.random() * 2}s`;
-                container.appendChild(el);
-                
-                // ၄ စက္ကန့်ကြာရင် ဖျက်မယ်
-                setTimeout(() => el.remove(), 4000);
-            }, index * 800);
-        });
-    }
-
-    // Typing Effect
-    const lyricsText = "Darling, you look perfect tonight... ကမ္ဘာပေါ်မှာ ကိုယ်အချစ်ရဆုံး ခလေးလေးအတွက်။";
-    let typingIndex = 0;
-
-    function typeLyrics() {
-        const textEl = document.getElementById('typing-text');
-        if (typingIndex < lyricsText.length) {
-            textEl.innerHTML += lyricsText.charAt(typingIndex);
-            typingIndex++;
-            setTimeout(typeLyrics, typingSpeed);
-        } else {
-            // စာရိုက်ပြီးရင် Cursor ကို ဖျောက်လိုက်မယ်
-            textEl.id = ''; 
+                const c = document.createElement('div');
+                c.className = 'heart';
+                c.innerHTML = ['✨','🎉','🌸'][Math.floor(Math.random()*3)];
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 2000);
+            }, i * 100);
         }
     }
 
-    // Start Everything
-    window.onload = function() {
-        setInterval(updateCounter, 1000);
-        setInterval(createHeart, 500); // နှလုံးသားက ပုံမှန်ကျနေမယ်
-        updateCounter();
-        loadQuiz();
-        setTimeout(typeLyrics, 2000); // ၂ စက္ကန့်ကြာမှ စာရိုက်တဲ့ effect ပြမယ်
-    };
-</script>
+    const lyrics = "You are the best thing that ever happened to me... \nHappy Anniversary, my love!";
+    let lIdx = 0;
+    function typeLyrics() {
+        const lyricsEl = document.getElementById('typing-lyrics');
+        if(lIdx < lyrics.length) {
+            lyricsEl.innerHTML += lyrics.charAt(lIdx) === '\n' ? '<br>' : lyrics.charAt(lIdx);
+            lIdx++;
+            setTimeout(typeLyrics, 70);
+        }
+    }
 
+    setInterval(createHeart, 600);
+    updateLogic();
+    loadQuiz();
+    setTimeout(typeLyrics, 1500);
+</script>
 </body>
 </html>
